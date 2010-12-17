@@ -19,7 +19,7 @@ component extends="fw1.corfield.framework" {
 	};
 
 	function setupApplication(){
-
+		ormReload(); //on app reset, also reset orm config (reloads changes to persistent cfcs)
 	}
 
 }
