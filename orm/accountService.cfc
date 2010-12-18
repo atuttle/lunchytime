@@ -31,7 +31,7 @@ component output="false"
 		return entityload("account",{},"",{offset=startIndex,maxresults=numItems});
 	}
 
-	remote account function getaccount( accountId )
+	remote account function getAccount( accountId )
 	{
 		/* Retrieve a single record and return it */
 		var primaryKeysMap = { accountId = accountId };
