@@ -10,4 +10,8 @@ component persistent="true" {
 		return entityLoad("link", {account=this},'linkId desc',{offset=startIndex,maxresults=numItems});
 	}
 
+	public function getLinkCount() output="false" {
+		return ormexecutequery("select count(*) from link where accountId = #getAccountId()#", true);
+	}
+
 }
