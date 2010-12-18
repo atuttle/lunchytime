@@ -14,15 +14,17 @@ component {
 		if (not structKeyExists(session, "accountId")){
 			variables.fw.redirect(action='main.home');
 		}
+		//set the accountId for service to use, if necessary, in all methods
+		rc.accountId = session.accountId;
 	}
 
 	//2nd
 	//public void function startHome(struct rc) output="false" {}
 
 	//3rd
-	public struct function list(struct rc) output="false" {
-		rc.accountId = session.accountId;
-		return rc;
+	public function list(struct rc) output="false" {
+		//also get the linkCount
+		variables.fw.service('links.linkCount','linkCount');
 	}
 
 	//4th, service is called
