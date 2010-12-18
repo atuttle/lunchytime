@@ -24,6 +24,10 @@ component extends="fw1.corfield.framework" {
 			//to reload orm! (otherwise setupApplication doesn't get called)
 			ormReload();
 		}
+		//set ColdSpring instance into FW1
+		local.bf = createObject("coldspring.beans.DefaultXMLBeanFactory").init();
+		local.bf.loadBeans(expandPath('./config/beans.xml.cfm'));
+		setBeanFactory(local.bf);
 		//clear session info on app restart
 		if (isDefined("session"))
 			structDelete(session, "accountId");
