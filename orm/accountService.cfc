@@ -1,6 +1,6 @@
 component output="false"
 {
-	remote account function createaccount(account item)
+	remote account function createAccount(account item)
 	{
 		/* Insert a new record in account */
 		transaction {
@@ -9,7 +9,7 @@ component output="false"
 		return item;
 	}
 
-	remote void function deleteaccount( accountId	)
+	remote void function deleteAccount( accountId	)
 	{
 		/* Delete a record in the database */
 		transaction {
@@ -21,7 +21,7 @@ component output="false"
 		return;
 	}
 
-	remote account[] function getAllaccounts()
+	remote account[] function getAllAccounts()
 	{
 		return entityload("account");
 	}
@@ -38,7 +38,14 @@ component output="false"
 		return entityload("account",primaryKeysMap,true);
 	}
 
-	remote account function updateaccount(account item)
+	remote function getAccountByEmail( email )
+	{
+		/* Retrieve a single record and return it */
+		var primaryKeysMap = { accountName = email };
+		return entityload("account",primaryKeysMap,true);
+	}
+
+	remote account function updateAccount(account item)
 	{
 		/* Update an existing record in the database */
 		transaction {
