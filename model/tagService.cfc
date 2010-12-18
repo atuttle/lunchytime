@@ -1,80 +1,56 @@
 component output="false" hint="CFBuilder-Generated:tag"
 {
-
-	
-	/*
-	TAG SERVICES
-
-	*/
-	/* Add tag */
-
-	remote tag function createtag(tag item)
+	remote tag function createTag(tag item)
 	{
-		/* Auto-generated method
-		  Insert a new record in tag */
-		entitysave(item);
-
-		/* return created item */
+		/* Insert a new record in tag */
+		transaction {
+			entitysave(item);
+		}
 		return item;
 	}
 
-	/* Remove tag */
-	remote void function deletetag( tagId	)
+	remote void function deleteTag( tagId	)
 	{
-		/* Auto-generated method
-		         Delete a record in the database */
-		var primaryKeysMap = { tagId = tagId };
-		var item=entityload("tag",primaryKeysMap,true);
-		if(isnull(item) eq false)
-			entitydelete(item);
-		
+		/* Delete a record in the database */
+		transaction {
+			var primaryKeysMap = { tagId = tagId };
+			var item=entityload("tag",primaryKeysMap,true);
+			if(isnull(item) eq false)
+				entitydelete(item);
+		}
 		return;
 	}
 
-	/* Get All tag */
-	remote tag[] function getAlltag()
+	remote tag[] function getAllTags()
 	{
-		/* Auto-generated method
-		        Retrieve set of records and return them as a query or array */
-		/* return items */
 		return entityload("tag");
 	}
 
-	/* Get All Paged tag */
-	remote tag[] function gettag_paged(numeric startIndex,numeric numItems)
+	remote tag[] function getTags_paged(numeric startIndex,numeric numItems)
 	{
-		/* Auto-generated method
-		         Return a page of numRows number of records as an array or query from the database for this startRow */
-		/* return paged items */
 		return entityload("tag",{},"",{offset=startIndex,maxresults=numItems});
 	}
 
-	/* Get tag */
-	remote tag function gettag( tagId )
+	remote tag function getTag( tagId )
 	{
-		/* Auto-generated method
-		         Retrieve a single record and return it */
-		/* return item */
+		/* Retrieve a single record and return it */
 		var primaryKeysMap = { tagId = tagId };
 		return entityload("tag",primaryKeysMap,true);
 	}
 
-	/* Save tag */
-	remote tag function updatetag(tag item)
+	remote tag function updateTag(tag item)
 	{
-		/* Auto-generated method
-		         Update an existing record in the database */
-		/* update tag */
-		entitysave(item);
+		/* Update an existing record in the database */
+		transaction {
+			entitysave(item);
+		}
 		return item;
 	}
 
-	/* Count tag */
 	remote numeric function count()
 	{
-	/* Auto-generated method
-		         Return the number of items in your table */
+		/* Return the number of items in your table */
 		return ormexecutequery("select count(*) from tag",true);
 	}
 
-} 
+}

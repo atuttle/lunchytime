@@ -8,7 +8,7 @@ component extends="fw1.corfield.framework" {
 	this.ormenabled = true;
 	this.datasource="atuttle_lunchtime";
 	this.ormsettings = {
-		cfclocation = expandPath('./ormObjects'),
+		cfclocation = expandPath('./orm'),
 		dialect = "MySQL"
 	};
 	this.mappings = {};
