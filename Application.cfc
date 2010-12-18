@@ -25,7 +25,8 @@ component extends="fw1.corfield.framework" {
 			ormReload();
 		}
 		//clear session info on app restart
-		structDelete(session, "accountId");
+		if (isDefined("session"))
+			structDelete(session, "accountId");
 	}
 
 	function setupRequest(){
