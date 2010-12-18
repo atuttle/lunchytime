@@ -19,7 +19,24 @@ component extends="fw1.corfield.framework" {
 	};
 
 	function setupApplication(){
-		ormReload(); //on app reset, also reset orm config (reloads changes to persistent cfcs)
+		if (structKeyExists(url, "ormReload") and url.ormReload){
+			//this method requires BOTH ?reload=true AND &ormReload=true in the URL
+			//to reload orm! (otherwise setupApplication doesn't get called)
+			ormReload();
+		}
+		//clear session info on app restart
+		structDelete(session, "accountId");
+	}
+
+	function setupRequest(){
+		url.profile = true; //for now, turn on orm profiling for every request
+	}
+
+	function onRequestEnd(){
+		if (structKeyExists(url, "profile") and url.profile){
+			ormFlush();
+			include "ormProfile.cfm";
+		}
 	}
 
 }
