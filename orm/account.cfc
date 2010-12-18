@@ -6,16 +6,8 @@ component persistent="true" {
 
 	property name="Links" fieldtype="one-to-many" cfc="link" type="array" singularname="Link" fkcolumn="accountId" lazy="true" inverse="true";
 
-/*
-	public account function init(){
-		variables.links = [];
-		return this;
+	public function getLinks_paged(numeric startIndex, numeric numItems) output="false" {
+		return entityLoad("link", {account=this},'linkId desc',{offset=startIndex,maxresults=numItems});
 	}
-
-	public array function addLink(link link){
-		if (hasLink(arguments.link)){ return; }
-		arguments.link.setAccount(this);
-	}
-*/
 
 }
