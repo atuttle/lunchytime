@@ -31,4 +31,8 @@ component persistent="true" {
         arguments.tag.removeLink(this);
     }
 
+	public numeric function getBookmarkedCount() output="false" {
+		return ormExecuteQuery ("select count(*) from link where linkUrl = :linkUrl", {linkUrl = getLinkUrl()}, true);
+	}
+
 }
