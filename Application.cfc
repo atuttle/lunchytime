@@ -11,7 +11,7 @@ component extends="fw1.corfield.framework" {
 		cfclocation = expandPath('./orm'),
 		dialect = "MySQL"
 	};
-	this.mappings = {};
+	this.mappings = { "/lunchtime" = getDirectoryFromPath(getCurrentTemplatePath()) };
 
 	//FW1 settings
 	variables.framework = {
